@@ -133,17 +133,20 @@ export default function App() {
 
       {/* Hero Section */}
       <section id="hero" className="relative flex min-h-screen items-center overflow-hidden pt-20">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
-          <img 
-            src="https://images.unsplash.com/photo-1503387762-592dee58c460?auto=format&fit=crop&q=80&w=2000" 
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/40 z-10" />
+          <motion.img 
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 10, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+            src="/background.jpg" 
             alt="Engenharia" 
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover opacity-60"
             referrerPolicy="no-referrer"
           />
         </div>
 
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 relative z-20">
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -353,14 +356,18 @@ export default function App() {
               { step: '02', title: 'Análise Técnica', desc: 'Realizamos a vistoria no local com equipamentos de precisão.', icon: Search },
               { step: '03', title: 'Entrega com ART', desc: 'Você recebe o laudo ou projeto com validade legal e responsabilidade técnica.', icon: CheckCircle2 },
             ].map((item, i) => (
-              <div key={i} className="relative text-center">
-                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-muted text-primary">
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -10 }}
+                className="relative text-center p-8 rounded-2xl transition-all hover:bg-muted/50 group"
+              >
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-muted text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                   <item.icon className="h-10 w-10" />
                 </div>
-                <div className="absolute top-0 right-1/2 translate-x-12 text-6xl font-black text-muted/50">{item.step}</div>
+                <div className="absolute top-4 right-1/2 translate-x-12 text-6xl font-black text-muted/50 transition-all group-hover:text-primary/10">{item.step}</div>
                 <h3 className="mb-4 text-xl font-bold text-secondary">{item.title}</h3>
                 <p className="text-muted-foreground">{item.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -378,23 +385,29 @@ export default function App() {
               { name: 'Ana Paula', role: 'Proprietária de Indústria', text: 'Precisávamos regularizar o SPDA com urgência. O atendimento foi rápido e o projeto seguiu todas as normas à risca. Recomendo.' },
               { name: 'Marcos Oliveira', role: 'Investidor Imobiliário', text: 'Sempre contrato a vistoria cautelar antes de fechar qualquer negócio. A segurança que eles passam é o diferencial.' },
             ].map((item, i) => (
-              <Card key={i} className="border-none shadow-sm">
-                <CardContent className="pt-8">
-                  <div className="mb-4 flex gap-1">
-                    {[1,2,3,4,5].map(s => <Zap key={s} className="h-4 w-4 fill-primary text-primary" />)}
-                  </div>
-                  <p className="mb-6 italic text-muted-foreground">"{item.text}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">
-                      {item.name[0]}
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.03, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Card className="border-none shadow-sm transition-shadow hover:shadow-xl h-full">
+                  <CardContent className="pt-8">
+                    <div className="mb-4 flex gap-1">
+                      {[1,2,3,4,5].map(s => <Zap key={s} className="h-4 w-4 fill-primary text-primary" />)}
                     </div>
-                    <div>
-                      <div className="font-bold text-secondary">{item.name}</div>
-                      <div className="text-xs text-muted-foreground">{item.role}</div>
+                    <p className="mb-6 italic text-muted-foreground">"{item.text}"</p>
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                        {item.name[0]}
+                      </div>
+                      <div>
+                        <div className="font-bold text-secondary">{item.name}</div>
+                        <div className="text-xs text-muted-foreground">{item.role}</div>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
