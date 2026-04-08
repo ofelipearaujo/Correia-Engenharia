@@ -33,7 +33,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const WHATSAPP_NUMBER = "5511999999999"; // Exemplo
+const WHATSAPP_NUMBER = "5579999546057"; // Exemplo
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Olá,%20gostaria%20de%20solicitar%20um%20orçamento%20técnico.`;
 
 export default function App() {
