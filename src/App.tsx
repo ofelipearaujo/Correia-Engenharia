@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Phone, 
@@ -18,7 +18,10 @@ import {
   ChevronDown,
   Instagram,
   Facebook,
-  Linkedin
+  Linkedin,
+  Target,
+  Eye,
+  Award
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -32,6 +35,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const WHATSAPP_NUMBER = "5579999546057"; // Exemplo
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Olá,%20gostaria%20de%20solicitar%20um%20orçamento%20técnico.`;
@@ -39,6 +49,7 @@ const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Olá,%20gostaria%20
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -52,6 +63,12 @@ export default function App() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Aqui você integraria com um serviço de e-mail ou backend
+    setShowSuccessDialog(true);
   };
 
   return (
@@ -83,10 +100,10 @@ export default function App() {
 
           {/* Desktop Menu */}
           <div className="hidden items-center gap-8 md:flex">
-            {['Serviços', 'Diferenciais', 'FAQ', 'Contato'].map((item) => (
+            {['Serviços', 'Sobre', 'Diferenciais', 'FAQ', 'Contato'].map((item) => (
               <button
                 key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
+                onClick={() => scrollToSection(item === 'Sobre' ? 'sobre' : item.toLowerCase())}
                 className="text-sm font-medium transition-colors hover:text-primary"
               >
                 {item}
@@ -113,10 +130,10 @@ export default function App() {
               className="absolute top-full left-0 w-full bg-white p-6 shadow-xl md:hidden"
             >
               <div className="flex flex-col gap-4">
-                {['Serviços', 'Diferenciais', 'FAQ', 'Contato'].map((item) => (
+                {['Serviços', 'Sobre', 'Diferenciais', 'FAQ', 'Contato'].map((item) => (
                   <button
                     key={item}
-                    onClick={() => scrollToSection(item.toLowerCase())}
+                    onClick={() => scrollToSection(item === 'Sobre' ? 'sobre' : item.toLowerCase())}
                     className="text-left text-lg font-medium"
                   >
                     {item}
@@ -344,6 +361,110 @@ export default function App() {
         </div>
       </section>
 
+      {/* About Us Section */}
+      <section id="sobre" className="py-24 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-16 md:grid-cols-2 items-center mb-24">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20" variant="secondary">
+                Nossa História
+              </Badge>
+              <h2 className="mb-6 text-3xl font-bold tracking-tight text-secondary md:text-5xl">
+                Mais de 15 anos de <span className="text-primary">excelência</span> técnica
+              </h2>
+              <div className="space-y-4 text-lg text-muted-foreground">
+                <p>
+                  Desde 2011, a Correia Engenharia atua com o compromisso de entregar soluções técnicas confiáveis, atendendo clientes residenciais, comerciais e industriais com rigor e precisão.
+                </p>
+                <p>
+                  Ao longo desse período, desenvolvemos uma atuação focada em projetos, laudos, vistorias e fiscalização de obras, garantindo mais segurança, controle e assertividade nas decisões dos nossos clientes.
+                </p>
+                <p className="font-semibold text-secondary">
+                  Nosso compromisso é evitar erros, reduzir prejuízos e entregar resultados que superam as expectativas normativas.
+                </p>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/5 rounded-full blur-3xl" />
+              <img 
+                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1000" 
+                alt="Equipe Técnica" 
+                className="rounded-2xl shadow-2xl relative z-10"
+                referrerPolicy="no-referrer"
+              />
+            </motion.div>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {[
+              {
+                title: 'Missão',
+                desc: 'Oferecer serviços de engenharia voltados a projetos, laudos, vistorias e fiscalização de obras, com precisão técnica, controle e segurança nas decisões do cliente.',
+                icon: Target
+              },
+              {
+                title: 'Visão',
+                desc: 'Ser referência na região em serviços técnicos de engenharia, reconhecido pela confiabilidade dos laudos, qualidade dos projetos e eficiência na fiscalização de obras.',
+                icon: Eye
+              },
+              {
+                title: 'Valores',
+                desc: [
+                  'Rigor técnico e responsabilidade profissional',
+                  'Clareza nos relatórios e orientações',
+                  'Compromisso com prazos',
+                  'Ética e transparência',
+                  'Foco em prevenção de problemas'
+                ],
+                icon: Award
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Card className="h-full border-none bg-muted/30 hover:bg-white hover:shadow-xl transition-all">
+                  <CardHeader>
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white">
+                      <item.icon className="h-6 w-6" />
+                    </div>
+                    <CardTitle className="text-2xl text-secondary">{item.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {Array.isArray(item.desc) ? (
+                      <ul className="space-y-2">
+                        {item.desc.map((val, idx) => (
+                          <li key={idx} className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                            <span className="text-sm">{val}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="text-muted-foreground leading-relaxed">
+                        {item.desc}
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* How it Works */}
       <section className="py-24">
         <div className="container mx-auto px-4">
@@ -466,7 +587,7 @@ export default function App() {
                   </div>
                   <div>
                     <div className="font-bold text-secondary">Telefone / WhatsApp</div>
-                    <div className="text-muted-foreground">(11) 99999-9999</div>
+                    <div className="text-muted-foreground">(79) 99954-6057</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -481,7 +602,7 @@ export default function App() {
               </div>
             </div>
             <Card className="p-6 shadow-xl">
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-4" onSubmit={handleFormSubmit}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="name">Nome Completo</Label>
@@ -560,6 +681,29 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="flex flex-col items-center text-center">
+            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
+              <CheckCircle2 className="h-10 w-10" />
+            </div>
+            <DialogTitle className="text-2xl font-bold text-secondary">Solicitação Enviada!</DialogTitle>
+            <DialogDescription className="text-base text-muted-foreground pt-2">
+              Recebemos suas informações com sucesso. Nossa equipe técnica analisará seu caso e entrará em contato em **até 24 horas**.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-6 flex justify-center">
+            <Button 
+              onClick={() => setShowSuccessDialog(false)}
+              className="w-full bg-primary py-6 text-lg font-bold rounded-full"
+            >
+              Entendido
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
