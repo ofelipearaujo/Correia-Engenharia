@@ -495,23 +495,38 @@ export default function App() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-muted/30 py-24">
+      <section className="bg-muted/50 py-24">
         <div className="container mx-auto px-4">
           <div className="mb-16 text-center">
-            <h2 className="text-3xl font-bold text-secondary md:text-5xl">O que dizem nossos clientes</h2>
+            <h2 className="text-3xl font-bold text-secondary md:text-5xl mb-4">O que dizem nossos clientes</h2>
+            <p className="max-w-3xl mx-auto text-muted-foreground text-lg">
+              A CORREIA ENGENHARIA destaca-se no mercado de Aracaju pela solidez técnica e pela segurança que transmite aos seus clientes em cada etapa do processo.
+            </p>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {[
-              { name: 'Ricardo Santos', role: 'Síndico Profissional', text: 'O laudo técnico da Correia Engenharia foi fundamental para resolvermos um impasse jurídico sobre a fachada do condomínio. Profissionalismo impecável.' },
-              { name: 'Ana Paula', role: 'Proprietária de Indústria', text: 'Precisávamos regularizar o SPDA com urgência. O atendimento foi rápido e o projeto seguiu todas as normas à risca. Recomendo.' },
-              { name: 'Marcos Oliveira', role: 'Investidor Imobiliário', text: 'Sempre contrato a vistoria cautelar antes de fechar qualquer negócio. A segurança que eles passam é o diferencial.' },
+              { 
+                name: 'Lucas Araujo', 
+                role: 'Cliente', 
+                text: 'Uma empresa que é sinônimo de transparência e profissionalismo. Transmitem total segurança em cada etapa do projeto, contando com uma equipe extremamente capacitada. Recomendo para quem busca evitar qualquer tipo de transtorno em sua obra.' 
+              },
+              { 
+                name: 'Marcus Vinicius Silveira', 
+                role: 'Cliente', 
+                text: 'Empresa sólida e de muita credibilidade. Além da competência técnica impecável, o compromisso com o cliente e com o resultado final é o que os coloca como referência na região. Trabalho de excelência!' 
+              },
+              { 
+                name: 'Victor Meira', 
+                role: 'Cliente', 
+                text: 'Excelente atendimento e muita agilidade em todos os processos. Os profissionais são extremamente atenciosos e explicam tudo com clareza. Com certeza, uma das melhores experiências que já tive com empresas de engenharia.' 
+              },
             ].map((item, i) => (
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.03, y: -5 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Card className="border-none shadow-sm transition-shadow hover:shadow-xl h-full">
+                <Card className="border border-border/50 bg-white shadow-md transition-shadow hover:shadow-2xl h-full">
                   <CardContent className="pt-8">
                     <div className="mb-4 flex gap-1">
                       {[1,2,3,4,5].map(s => <Zap key={s} className="h-4 w-4 fill-primary text-primary" />)}
