@@ -119,7 +119,7 @@ export default function App() {
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('hero')}>
             <img 
-              src="logo.png" 
+              src="/logo.png" 
               alt="Correia Engenharia Logo" 
               className="h-12 w-auto"
             />
@@ -183,7 +183,7 @@ export default function App() {
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 10, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-            src="background.jpg" 
+            src="/background.jpg" 
             alt="Engenharia" 
             className="h-full w-full object-cover opacity-60"
           />
@@ -744,7 +744,7 @@ export default function App() {
             <div className="col-span-2">
               <div className="mb-6 flex items-center gap-2">
                 <img 
-                  src="logo.png" 
+                  src="/logo.png" 
                   alt="Correia Engenharia Logo" 
                   className="h-12 w-auto brightness-0 invert"
                 />
