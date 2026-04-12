@@ -21,7 +21,8 @@ import {
   Linkedin,
   Target,
   Eye,
-  Award
+  Award,
+  MapPin
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -50,6 +51,13 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    whatsapp: '',
+    service: 'Laudo Técnico',
+    message: ''
+  });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -65,10 +73,30 @@ export default function App() {
     setIsMenuOpen(false);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aqui você integraria com um serviço de e-mail ou backend
-    setShowSuccessDialog(true);
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        setShowSuccessDialog(true);
+        setFormData({ name: '', whatsapp: '', service: 'Laudo Técnico', message: '' });
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error || 'Erro ao enviar solicitação. Por favor, tente novamente.');
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro de conexão. Por favor, verifique sua internet.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -607,6 +635,15 @@ export default function App() {
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <MapPin className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-secondary">Endereço</div>
+                    <div className="text-muted-foreground">Av. Pres. Tancredo Neves, 3515 - Jabotiana, Aracaju - SE</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Users className="h-6 w-6" />
                   </div>
                   <div>
@@ -621,16 +658,33 @@ export default function App() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="name">Nome Completo</Label>
-                    <Input id="name" placeholder="Seu nome" />
+                    <Input 
+                      id="name" 
+                      placeholder="Seu nome" 
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="whatsapp">WhatsApp</Label>
-                    <Input id="whatsapp" placeholder="(00) 00000-0000" />
+                    <Input 
+                      id="whatsapp" 
+                      placeholder="(00) 00000-0000" 
+                      required
+                      value={formData.whatsapp}
+                      onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                    />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="service">Tipo de Serviço</Label>
-                  <select id="service" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                  <select 
+                    id="service" 
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                  >
                     <option>Laudo Técnico</option>
                     <option>Vistoria / Inspeção</option>
                     <option>SPDA (Para-raios)</option>
@@ -641,11 +695,46 @@ export default function App() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Mensagem</Label>
-                  <Textarea id="message" placeholder="Conte-nos brevemente sobre sua necessidade" className="min-h-[120px]" />
+                  <Textarea 
+                    id="message" 
+                    placeholder="Conte-nos brevemente sobre sua necessidade" 
+                    className="min-h-[120px]" 
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  />
                 </div>
-                <Button className="w-full bg-primary py-6 text-lg font-bold">Enviar Solicitação</Button>
+                <Button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-primary py-6 text-lg font-bold"
+                >
+                  {isSubmitting ? 'Enviando...' : 'Enviar Solicitação'}
+                </Button>
               </form>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Google Maps Section */}
+      <section className="bg-muted/30 py-24">
+        <div className="container mx-auto px-4">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-secondary md:text-5xl">Onde Estamos</h2>
+            <p className="text-lg text-muted-foreground">Visite nosso escritório ou agende uma reunião técnica.</p>
+          </div>
+          <div className="overflow-hidden rounded-2xl shadow-2xl border border-border/50">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.348255953046!2d-37.08944542405623!3d-10.93706038922156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71ab307777777777%3A0x7777777777777777!2sAv.%20Pres.%20Tancredo%20Neves%2C%203515%20-%20Jabotiana%2C%20Aracaju%20-%20SE%2C%2049095-000!5e0!3m2!1spt-BR!2sbr!4v1712753400000!5m2!1spt-BR!2sbr" 
+              width="100%" 
+              height="450" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Localização Correia Engenharia"
+            ></iframe>
           </div>
         </div>
       </section>
