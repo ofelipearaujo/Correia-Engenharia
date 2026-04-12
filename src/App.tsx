@@ -422,10 +422,9 @@ export default function App() {
             >
               <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/5 rounded-full blur-3xl" />
               <img 
-                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1000" 
-                alt="Equipe Técnica" 
+                src="/equipe-correia.jpg" 
+                alt="Equipe Correia Engenharia" 
                 className="rounded-2xl shadow-2xl relative z-10"
-                referrerPolicy="no-referrer"
               />
             </motion.div>
           </div>
