@@ -10,7 +10,8 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const resend = process.env.VITE_RESEND_API_KEY ? new Resend(process.env.VITE_RESEND_API_KEY) : null;
+const apiKey = process.env.VITE_RESEND_API_KEY || process.env.RESEND_API_KEY;
+const resend = apiKey ? new Resend(apiKey) : null;
 
 async function startServer() {
   const app = express();
@@ -43,7 +44,7 @@ async function startServer() {
         });
         res.json({ success: true, message: "E-mail enviado com sucesso!" });
       } else {
-        console.log("VITE_RESEND_API_KEY não configurada. Dados recebidos:", { name, whatsapp, service, message });
+        console.log("API Key do Resend não configurada. Dados recebidos:", { name, whatsapp, service, message });
         res.json({ 
           success: true, 
           message: "Modo de demonstração: API Key não configurada, mas os dados foram recebidos no servidor." 
