@@ -47,6 +47,31 @@ import {
 const WHATSAPP_NUMBER = "5579999546057"; // Exemplo
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Olá,%20gostaria%20de%20solicitar%20um%20orçamento%20técnico.`;
 
+const Logo = ({ className = "h-12 w-auto", invert = false }: { className?: string, invert?: false | true }) => {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className={`flex items-center gap-2 font-bold text-xl tracking-tighter ${invert ? 'text-white' : 'text-secondary'}`}>
+        <div className="bg-primary p-1.5 rounded">
+          <HardHat className="h-6 w-6 text-white" />
+        </div>
+        <span className="uppercase">Correia<span className="text-primary">Engenharia</span></span>
+      </div>
+    );
+  }
+
+  return (
+    <img 
+      src="/logo.png" 
+      alt="Correia Engenharia Logo" 
+      className={`${className} ${invert ? 'brightness-0 invert' : ''}`}
+      referrerPolicy="no-referrer"
+      onError={() => setError(true)}
+    />
+  );
+};
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -118,12 +143,7 @@ export default function App() {
       <nav className={`fixed top-0 z-40 w-full transition-all duration-300 ${scrolled ? 'bg-white/90 py-3 shadow-md backdrop-blur-md' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto flex items-center justify-between px-4">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <img 
-              src="/logo.png" 
-              alt="Correia Engenharia Logo" 
-              className="h-12 w-auto"
-              referrerPolicy="no-referrer"
-            />
+            <Logo />
           </div>
 
           {/* Desktop Menu */}
@@ -745,12 +765,7 @@ export default function App() {
           <div className="mb-12 grid gap-8 md:grid-cols-4">
             <div className="col-span-2">
               <div className="mb-6 flex items-center gap-2">
-                <img 
-                  src="/logo.png" 
-                  alt="Correia Engenharia Logo" 
-                  className="h-12 w-auto brightness-0 invert"
-                  referrerPolicy="no-referrer"
-                />
+                <Logo invert />
               </div>
               <p className="max-w-md">
                 Especialistas em engenharia diagnóstica, segurança estrutural e soluções técnicas com responsabilidade e ética profissional.
