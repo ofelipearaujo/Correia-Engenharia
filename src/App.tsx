@@ -131,6 +131,7 @@ export default function App() {
               src="/logo.png" 
               alt="Correia Engenharia Logo" 
               className="h-12 w-auto"
+              referrerPolicy="no-referrer"
             />
           </div>
 
@@ -416,14 +417,25 @@ export default function App() {
               <div className="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-primary/20 blur-3xl" />
               <div className="absolute -bottom-4 -right-4 h-32 w-32 rounded-full bg-primary/20 blur-3xl" />
               
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1000" 
-                  alt="Inspeção Técnica" 
-                  className="relative z-10 block w-full"
-                  referrerPolicy="no-referrer"
-                />
+              <div className="relative h-[350px] overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-2xl md:h-[450px]">
+                {/* Digital Grid */}
+                <div className="absolute inset-0 opacity-20 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:25px_25px]" />
                 
+                {/* Abstract Structural Waveform */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-40">
+                  <svg width="100%" height="100%" viewBox="0 0 400 200" className="w-full">
+                    <motion.path
+                      d="M0 100 L 50 100 L 60 40 L 80 160 L 100 100 L 150 100 L 160 20 L 180 180 L 200 100 L 400 100"
+                      fill="none"
+                      stroke="#B62734"
+                      strokeWidth="2"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 2, repeat: Infinity, repeatType: "loop", ease: "linear" }}
+                    />
+                  </svg>
+                </div>
+
                 {/* Scanning Line Effect */}
                 <motion.div 
                   animate={{ top: ["0%", "100%", "0%"] }}
@@ -432,19 +444,16 @@ export default function App() {
                   style={{ top: '0%' }}
                 />
                 
-                {/* Digital Grid Overlay */}
-                <div className="absolute inset-0 z-15 opacity-20 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:30px_30px]" />
-
                 {/* Risk Hotspots */}
                 <motion.div 
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  className="absolute top-[30%] left-[40%] z-30"
+                  className="absolute top-[25%] left-[30%] z-30"
                 >
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
                   <div className="relative h-3 w-3 rounded-full bg-red-600 shadow-[0_0_10px_red]"></div>
                   <div className="absolute left-4 top-0 whitespace-nowrap rounded bg-black/80 px-2 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
-                    Fissura Detectada
+                    FALHA ESTRUTURAL
                   </div>
                 </motion.div>
 
@@ -452,34 +461,53 @@ export default function App() {
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="absolute bottom-[40%] right-[30%] z-30"
+                  className="absolute bottom-[30%] right-[25%] z-30"
                 >
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
                   <div className="relative h-3 w-3 rounded-full bg-red-600 shadow-[0_0_10px_red]"></div>
                   <div className="absolute left-4 top-0 whitespace-nowrap rounded bg-black/80 px-2 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
-                    Infiltração Crítica
+                    INFILTRAÇÃO ATIVA
                   </div>
                 </motion.div>
+
+                {/* Live Data Feed */}
+                <div className="absolute bottom-4 left-4 right-4 z-30 flex flex-col gap-2">
+                  <div className="flex justify-between text-[10px] font-mono text-primary">
+                    <span>ANÁLISE DE VIBRAÇÃO</span>
+                    <span className="animate-pulse">LIVE</span>
+                  </div>
+                  <div className="flex gap-1">
+                    {[...Array(20)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        animate={{ height: [10, Math.random() * 30 + 10, 10] }}
+                        transition={{ duration: 0.5, repeat: Infinity, delay: i * 0.05 }}
+                        className="w-full bg-primary/40"
+                        style={{ height: '10px' }}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              {/* Dynamic Risk Card */}
+              {/* Dynamic Risk Card - Now visible on mobile but smaller */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="absolute -bottom-6 -left-6 z-40 hidden rounded-2xl bg-white p-6 shadow-2xl md:block lg:-left-12"
+                className="absolute -bottom-4 -left-2 z-40 rounded-2xl bg-white p-4 shadow-2xl md:-bottom-6 md:-left-6 md:p-6 lg:-left-12"
               >
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-red-600">
-                    <Activity className="h-6 w-6 animate-pulse" />
+                <div className="mb-3 flex items-center gap-3 md:mb-4">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-100 text-red-600 md:h-10 md:w-10">
+                    <Activity className="h-5 w-5 animate-pulse md:h-6 md:w-6" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Monitoramento</p>
-                    <p className="text-sm font-bold text-secondary">Análise de Risco Real</p>
+                    <p className="text-[8px] font-bold uppercase tracking-wider text-muted-foreground md:text-[10px]">Monitoramento</p>
+                    <p className="text-xs font-bold text-secondary md:text-sm">Análise de Risco</p>
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <div className="h-1.5 w-48 overflow-hidden rounded-full bg-gray-100">
+                <div className="space-y-2 md:space-y-3">
+                  <div className="h-1 w-32 overflow-hidden rounded-full bg-gray-100 md:h-1.5 md:w-48">
                     <motion.div 
                       initial={{ width: "0%" }}
                       whileInView={{ width: "82%" }}
@@ -487,8 +515,8 @@ export default function App() {
                       className="h-full bg-red-500"
                     />
                   </div>
-                  <div className="flex justify-between text-[10px] font-bold">
-                    <span className="text-red-600 uppercase">Risco de Colapso</span>
+                  <div className="flex justify-between text-[8px] font-bold md:text-[10px]">
+                    <span className="text-red-600 uppercase">Risco Crítico</span>
                     <span className="text-secondary">82%</span>
                   </div>
                 </div>
@@ -498,11 +526,11 @@ export default function App() {
               <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                className="absolute -top-4 -right-4 z-40 rounded-full bg-secondary px-4 py-2 text-[10px] font-bold text-white shadow-xl border border-white/10 backdrop-blur-md"
+                className="absolute -top-4 -right-2 z-40 rounded-full bg-secondary px-3 py-1.5 text-[8px] font-bold text-white shadow-xl border border-white/10 backdrop-blur-md md:-right-4 md:px-4 md:py-2 md:text-[10px]"
               >
                 <div className="flex items-center gap-2">
                   <Scan className="h-3 w-3 text-primary" />
-                  <span>SCANNER TÉCNICO ATIVO</span>
+                  <span>DIAGNÓSTICO DIGITAL</span>
                 </div>
               </motion.div>
             </div>
@@ -545,9 +573,10 @@ export default function App() {
             >
               <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/5 rounded-full blur-3xl" />
               <img 
-                src="/equipe-correia.png" 
+                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1000" 
                 alt="Equipe Correia Engenharia" 
                 className="rounded-2xl shadow-2xl relative z-10"
+                referrerPolicy="no-referrer"
               />
             </motion.div>
           </div>
@@ -871,6 +900,7 @@ export default function App() {
                   src="/logo.png" 
                   alt="Correia Engenharia Logo" 
                   className="h-12 w-auto brightness-0 invert"
+                  referrerPolicy="no-referrer"
                 />
               </div>
               <p className="max-w-md">
