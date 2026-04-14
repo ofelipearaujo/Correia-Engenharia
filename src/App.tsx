@@ -125,8 +125,8 @@ export default function App() {
 
       {/* Navbar */}
       <nav className={`fixed top-0 z-40 w-full transition-all duration-300 ${scrolled ? 'bg-white/90 py-3 shadow-md backdrop-blur-md' : 'bg-transparent py-6'}`}>
-        <div className="container mx-auto flex items-center justify-between px-4">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('hero')}>
+        <div className="container relative mx-auto flex items-center justify-between px-4">
+          <div className="flex w-full justify-center cursor-pointer md:w-auto md:justify-start" onClick={() => scrollToSection('hero')}>
             <img 
               src="/logo.png" 
               alt="Correia Engenharia Logo" 
@@ -153,7 +153,7 @@ export default function App() {
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="relative h-10 w-10 text-secondary md:hidden" 
+            className="absolute right-4 h-10 w-10 text-secondary md:relative md:right-0 md:hidden" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle Menu"
           >
