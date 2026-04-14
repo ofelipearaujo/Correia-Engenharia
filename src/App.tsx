@@ -22,7 +22,9 @@ import {
   Target,
   Eye,
   Award,
-  MapPin
+  MapPin,
+  Activity,
+  Scan
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -68,7 +70,14 @@ export default function App() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
     setIsMenuOpen(false);
   };
@@ -142,8 +151,36 @@ export default function App() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X /> : <Menu />}
+          <button 
+            className="relative h-10 w-10 text-secondary md:hidden" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle Menu"
+          >
+            <AnimatePresence mode="wait">
+              {isMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ opacity: 0, rotate: -90 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: 90 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <X className="h-6 w-6" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ opacity: 0, rotate: 90 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: -90 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <Menu className="h-6 w-6" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </div>
 
@@ -151,12 +188,13 @@ export default function App() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 w-full bg-white p-6 shadow-xl md:hidden"
+              initial={{ opacity: 0, height: 0, y: -10 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              className="absolute top-full left-0 w-full overflow-hidden bg-white shadow-xl md:hidden"
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 p-6">
                 {['Serviços', 'Sobre', 'Diferenciais', 'FAQ', 'Contato'].map((item) => (
                   <button
                     key={item}
@@ -317,10 +355,11 @@ export default function App() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -8 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <Card className="group h-full border-none bg-muted/50 transition-all hover:bg-white hover:shadow-xl">
+                <Card className="group h-full border-transparent bg-muted/50 transition-all duration-300 hover:border-primary/20 hover:bg-white hover:shadow-2xl">
                   <CardHeader>
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-white transition-transform group-hover:scale-110">
                       <service.icon className="h-6 w-6" />
@@ -376,12 +415,96 @@ export default function App() {
             <div className="relative">
               <div className="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-primary/20 blur-3xl" />
               <div className="absolute -bottom-4 -right-4 h-32 w-32 rounded-full bg-primary/20 blur-3xl" />
-              <img 
-                src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1000" 
-                alt="Inspeção Técnica" 
-                className="relative rounded-2xl shadow-2xl"
-                referrerPolicy="no-referrer"
-              />
+              
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1000" 
+                  alt="Inspeção Técnica" 
+                  className="relative z-10 block w-full"
+                  referrerPolicy="no-referrer"
+                />
+                
+                {/* Scanning Line Effect */}
+                <motion.div 
+                  animate={{ top: ["0%", "100%", "0%"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  className="absolute left-0 right-0 z-20 h-0.5 bg-primary shadow-[0_0_15px_rgba(var(--primary),0.8)]"
+                  style={{ top: '0%' }}
+                />
+                
+                {/* Digital Grid Overlay */}
+                <div className="absolute inset-0 z-15 opacity-20 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:30px_30px]" />
+
+                {/* Risk Hotspots */}
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  className="absolute top-[30%] left-[40%] z-30"
+                >
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+                  <div className="relative h-3 w-3 rounded-full bg-red-600 shadow-[0_0_10px_red]"></div>
+                  <div className="absolute left-4 top-0 whitespace-nowrap rounded bg-black/80 px-2 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
+                    Fissura Detectada
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="absolute bottom-[40%] right-[30%] z-30"
+                >
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+                  <div className="relative h-3 w-3 rounded-full bg-red-600 shadow-[0_0_10px_red]"></div>
+                  <div className="absolute left-4 top-0 whitespace-nowrap rounded bg-black/80 px-2 py-1 text-[10px] font-bold text-white backdrop-blur-sm">
+                    Infiltração Crítica
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Dynamic Risk Card */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="absolute -bottom-6 -left-6 z-40 hidden rounded-2xl bg-white p-6 shadow-2xl md:block lg:-left-12"
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-red-600">
+                    <Activity className="h-6 w-6 animate-pulse" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Monitoramento</p>
+                    <p className="text-sm font-bold text-secondary">Análise de Risco Real</p>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="h-1.5 w-48 overflow-hidden rounded-full bg-gray-100">
+                    <motion.div 
+                      initial={{ width: "0%" }}
+                      whileInView={{ width: "82%" }}
+                      transition={{ duration: 2, delay: 1.2 }}
+                      className="h-full bg-red-500"
+                    />
+                  </div>
+                  <div className="flex justify-between text-[10px] font-bold">
+                    <span className="text-red-600 uppercase">Risco de Colapso</span>
+                    <span className="text-secondary">82%</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Modern Tech Badge */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                className="absolute -top-4 -right-4 z-40 rounded-full bg-secondary px-4 py-2 text-[10px] font-bold text-white shadow-xl border border-white/10 backdrop-blur-md"
+              >
+                <div className="flex items-center gap-2">
+                  <Scan className="h-3 w-3 text-primary" />
+                  <span>SCANNER TÉCNICO ATIVO</span>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -585,9 +708,11 @@ export default function App() {
               { q: 'Quanto custa um serviço de engenharia?', a: 'O valor depende da complexidade, metragem e tipo de serviço. Oferecemos orçamentos personalizados após uma breve análise do seu caso via WhatsApp.' },
               { q: 'Qual o tempo médio de entrega?', a: 'Para laudos simples, a entrega ocorre em média entre 3 a 7 dias úteis após a vistoria. Casos complexos são acordados individualmente.' },
             ].map((item, i) => (
-              <AccordionItem key={i} value={`item-${i}`}>
-                <AccordionTrigger className="text-left text-lg font-bold text-secondary">{item.q}</AccordionTrigger>
-                <AccordionContent className="text-base text-muted-foreground">
+              <AccordionItem key={i} value={`item-${i}`} className="mb-4 rounded-xl border border-border bg-white px-2 shadow-sm transition-all hover:shadow-md">
+                <AccordionTrigger className="py-6 text-left text-lg font-extrabold text-secondary hover:no-underline md:text-xl">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="pb-6 text-base leading-relaxed text-muted-foreground md:text-lg">
                   {item.a}
                 </AccordionContent>
               </AccordionItem>
@@ -777,7 +902,7 @@ export default function App() {
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-sm">
-            <p>© 2024 Correia Engenharia Ltda. Todos os direitos reservados. Engenheiro Responsável: CREA-SP 123456789</p>
+            <p>© 2026 Correia Engenharia Ltda. Todos os direitos reservados. Engenheiro Responsável: CREA-SE 123456789</p>
           </div>
         </div>
       </footer>
