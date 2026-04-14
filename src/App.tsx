@@ -422,7 +422,7 @@ export default function App() {
             >
               <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/5 rounded-full blur-3xl" />
               <img 
-                src="/equipe-correia.jpg" 
+                src="/equipe-correia.png" 
                 alt="Equipe Correia Engenharia" 
                 className="rounded-2xl shadow-2xl relative z-10"
               />
