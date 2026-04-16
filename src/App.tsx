@@ -239,10 +239,10 @@ export default function App() {
                 <ShieldCheck className="mr-1 h-3 w-3" /> Responsabilidade Técnica & ART
               </Badge>
               <h1 className="mb-6 text-5xl font-extrabold leading-[1.1] tracking-tight text-secondary md:text-7xl">
-                Evite prejuízos e riscos na sua obra com <span className="text-primary">engenharia especializada</span>
+                Engenharia com <span className="text-primary">responsabilidade técnica</span> e solução prática
               </h1>
               <p className="mb-8 text-lg text-muted-foreground md:text-xl">
-                Laudos técnicos, vistorias e soluções com validade jurídica para proteger seu patrimônio e garantir a segurança da sua edificação.
+                Laudos, vistorias, projetos arquitetônicos e complementares, levantamento cadastral, regularização de imóveis, fiscalização e gestão de obras.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Button 
@@ -307,49 +307,61 @@ export default function App() {
       <section id="serviços" className="py-24">
         <div className="container mx-auto px-4">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight text-secondary md:text-5xl">Nossas Soluções Técnicas</h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Serviços de alta complexidade executados com rigor técnico e conformidade normativa.
+            <h2 className="mb-4 text-3xl font-bold tracking-tight text-secondary md:text-5xl">Nossos Serviços Técnicos</h2>
+            <p className="mx-auto max-w-3xl text-muted-foreground text-lg">
+              Especialista em laudos, vistorias, projetos, regularização e acompanhamento técnico de obras.
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                title: 'Laudo Técnico',
-                desc: 'Documento com validade jurídica para proteger você em processos, reformas e vistorias cautelares.',
+                title: 'Laudos Técnicos',
+                desc: 'Análise de patologias, avaliação de condições construtivas e identificação de problemas estruturais.',
                 icon: FileText,
-                benefit: 'Segurança Jurídica'
+                benefit: 'Pareceres Precisos'
               },
               {
-                title: 'Vistorias e Inspeções',
-                desc: 'Análise detalhada de patologias estruturais, infiltrações e conformidade de sistemas prediais.',
+                title: 'Vistorias Técnicas',
+                desc: 'Realização de vistorias em imóveis e obras para verificação de condições e emissão de relatórios.',
                 icon: Search,
-                benefit: 'Prevenção de Riscos'
+                benefit: 'Vistorias Detalhadas'
               },
               {
-                title: 'SPDA (Para-raios)',
-                desc: 'Projeto, instalação e laudo de para-raios conforme NBR 5419 para proteção contra descargas.',
+                title: 'Projetos Arquitetônicos',
+                desc: 'Desenvolvimento de projetos focados em funcionalidade, viabilidade e adequação às necessidades.',
+                icon: Award,
+                benefit: 'Design Funcional'
+              },
+              {
+                title: 'Projetos Complementares',
+                desc: 'Elaboração de projetos hidráulicos, sanitários, drenagem e outras soluções técnicas essenciais.',
                 icon: Zap,
-                benefit: 'Proteção Total'
+                benefit: 'Soluções Integradas'
+              },
+              {
+                title: 'Levantamento Cadastral',
+                desc: 'Levantamento técnico de medidas e características para elaboração de plantas e atualização.',
+                icon: MapPin,
+                benefit: 'Precisão em Medidas'
+              },
+              {
+                title: 'Regularização de Imóveis',
+                desc: 'Apoio técnico na organização de documentação, projetos para fiscalização e processos formais.',
+                icon: CheckCircle2,
+                benefit: 'Imóvel Regular'
+              },
+              {
+                title: 'Fiscalização de Obras',
+                desc: 'Acompanhamento técnico da execução para verificar conformidade, qualidade e redução de falhas.',
+                icon: ShieldCheck,
+                benefit: 'Controle de Qualidade'
               },
               {
                 title: 'Gestão de Obras',
-                desc: 'Acompanhamento técnico para garantir que sua obra siga o projeto, prazo e orçamento previsto.',
+                desc: 'Suporte técnico para planejamento e coordenação da obra, com foco em prazo e qualidade.',
                 icon: HardHat,
-                benefit: 'Economia e Prazo'
-              },
-              {
-                title: 'Trabalhos em Altura',
-                desc: 'Inspeções e manutenções em fachadas utilizando técnicas de acesso por corda com segurança.',
-                icon: ShieldCheck,
-                benefit: 'Acesso Especializado'
-              },
-              {
-                title: 'Regularização',
-                desc: 'Processos de AVCB, Habite-se e regularização de imóveis junto aos órgãos competentes.',
-                icon: CheckCircle2,
-                benefit: 'Imóvel Regular'
+                benefit: 'Gestão Eficiente'
               }
             ].map((service, i) => (
               <motion.div
@@ -550,18 +562,18 @@ export default function App() {
               <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20" variant="secondary">
                 Nossa História
               </Badge>
-              <h2 className="mb-6 text-3xl font-bold tracking-tight text-secondary md:text-5xl">
-                Mais de 15 anos de <span className="text-primary">excelência</span> técnica
+              <h2 className="mb-6 text-3xl font-bold tracking-tight text-secondary md:text-5xl leading-tight">
+                Engenharia com <span className="text-primary">clareza</span>, responsabilidade e solução prática.
               </h2>
               <div className="space-y-4 text-lg text-muted-foreground">
                 <p>
-                  Desde 2011, a Correia Engenharia atua com o compromisso de entregar soluções técnicas confiáveis, atendendo clientes residenciais, comerciais e industriais com rigor e precisão.
+                  Atuamos com serviços de engenharia voltados à análise técnica, elaboração de projetos, regularização de imóveis e acompanhamento de obras, oferecendo soluções com responsabilidade e foco prático para cada demanda.
                 </p>
                 <p>
-                  Ao longo desse período, desenvolvemos uma atuação focada em projetos, laudos, vistorias e fiscalização de obras, garantindo mais segurança, controle e assertividade nas decisões dos nossos clientes.
+                  Nosso trabalho atende necessidades como laudos, vistorias, projetos arquitetônicos e complementares, levantamento cadastral, fiscalização e gestão de obra, buscando sempre unir segurança técnica e organização.
                 </p>
                 <p className="font-semibold text-secondary">
-                  Nosso compromisso é evitar erros, reduzir prejuízos e entregar resultados que superam as expectativas normativas.
+                  Cada serviço é conduzido com análise criteriosa e foco em orientar o cliente com clareza, seja para construir, corrigir ou regularizar.
                 </p>
               </div>
             </motion.div>
@@ -643,29 +655,55 @@ export default function App() {
       </section>
 
       {/* How it Works */}
-      <section className="py-24">
+      <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="mb-16 text-center">
             <h2 className="text-3xl font-bold text-secondary md:text-5xl">Como Funciona</h2>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-5">
             {[
-              { step: '01', title: 'Contato via WhatsApp', desc: 'Você nos conta seu problema e agendamos uma visita técnica rápida.', icon: MessageCircle },
-              { step: '02', title: 'Análise Técnica', desc: 'Realizamos a vistoria no local com equipamentos de precisão.', icon: Search },
-              { step: '03', title: 'Entrega com ART', desc: 'Você recebe o laudo ou projeto com validade legal e responsabilidade técnica.', icon: CheckCircle2 },
+              { step: '01', title: 'Entendimento', desc: 'Escuta ativa para compreender a sua necessidade específica.', icon: MessageCircle },
+              { step: '02', title: 'Análise Inicial', desc: 'Avaliação técnica preliminar para direcionar a solução.', icon: Search },
+              { step: '03', title: 'Proposta Clara', desc: 'Escopo detalhado e transparente para sua aprovação.', icon: FileText },
+              { step: '04', title: 'Execução', desc: 'Execução do serviço técnico com rigor e acompanhamento.', icon: HardHat },
+              { step: '05', title: 'Entrega', desc: 'Finalização e orientações sobre os próximos passos.', icon: CheckCircle2 },
             ].map((item, i) => (
               <motion.div 
                 key={i} 
                 whileHover={{ y: -10 }}
-                className="relative text-center p-8 rounded-2xl transition-all hover:bg-muted/50 group"
+                className="relative text-center p-6 rounded-2xl transition-all hover:bg-white hover:shadow-xl group"
               >
-                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-muted text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                  <item.icon className="h-10 w-10" />
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-muted text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                  <item.icon className="h-8 w-8" />
                 </div>
-                <div className="absolute top-4 right-1/2 translate-x-12 text-6xl font-black text-muted/50 transition-all group-hover:text-primary/10">{item.step}</div>
-                <h3 className="mb-4 text-xl font-bold text-secondary">{item.title}</h3>
-                <p className="text-muted-foreground">{item.desc}</p>
+                <div className="absolute top-2 right-1/2 translate-x-10 text-4xl font-black text-muted/30 transition-all group-hover:text-primary/10">{item.step}</div>
+                <h3 className="mb-3 text-lg font-bold text-secondary">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Target Audience */}
+      <section className="py-16 bg-secondary text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h3 className="text-2xl font-bold md:text-3xl">Para quem atendemos</h3>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+            {[
+              'Proprietários de Imóveis',
+              'Condomínios',
+              'Empresas',
+              'Investidores',
+              'Parceiros da Construção',
+              'Clientes Residenciais'
+            ].map((target, i) => (
+              <div key={i} className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+                <CheckCircle2 className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium">{target}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -753,14 +791,14 @@ export default function App() {
       {/* CTA Section */}
       <section className="bg-primary py-20 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-6 text-3xl font-bold md:text-5xl">Fale agora com um engenheiro e evite prejuízos</h2>
-          <p className="mb-10 text-xl text-white/80">Atendimento imediato para situações de urgência e orçamentos técnicos.</p>
+          <h2 className="mb-6 text-3xl font-bold md:text-5xl">Precisa de apoio técnico para sua obra ou imóvel?</h2>
+          <p className="mb-10 text-xl text-white/80">Entre em contato e solicite um orçamento técnico especializado.</p>
           <Button 
             size="lg" 
             onClick={() => window.open(WHATSAPP_LINK, '_blank')}
             className="h-16 rounded-full bg-white px-10 text-xl font-bold text-primary hover:bg-white/90"
           >
-            <MessageCircle className="mr-2 h-6 w-6" /> Chamar no WhatsApp
+            <MessageCircle className="mr-2 h-6 w-6" /> Falar com Engenheiro
           </Button>
         </div>
       </section>
