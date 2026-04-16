@@ -335,7 +335,7 @@ export default function App() {
               },
               {
                 title: 'Projetos Complementares',
-                desc: 'Elaboração de projetos hidráulicos, sanitários, drenagem e outras soluções técnicas essenciais.',
+                desc: 'Elaboração de projetos hidráulicos, elétricos, estruturais, SPDA e outras soluções técnicas essenciais.',
                 icon: Zap,
                 benefit: 'Soluções Integradas'
               },
@@ -970,7 +970,7 @@ export default function App() {
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-sm">
-            <p>© 2026 Correia Engenharia Ltda. Todos os direitos reservados. Engenheiro Responsável: CREA-SE 123456789</p>
+            <p>© 2026 Correia Engenharia. Todos os direitos reservados. Engenheiro Responsável: CREA-SE 123456789</p>
           </div>
         </div>
       </footer>
