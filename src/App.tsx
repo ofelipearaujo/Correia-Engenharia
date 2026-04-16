@@ -238,25 +238,25 @@ export default function App() {
               <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20" variant="secondary">
                 <ShieldCheck className="mr-1 h-3 w-3" /> Responsabilidade Técnica & ART
               </Badge>
-              <h1 className="mb-6 text-5xl font-extrabold leading-[1.1] tracking-tight text-secondary md:text-7xl">
+              <h1 className="mb-6 text-4xl sm:text-5xl font-extrabold leading-[1.1] tracking-tight text-secondary md:text-7xl break-words">
                 Engenharia com <span className="text-primary">responsabilidade técnica</span> e solução prática
               </h1>
-              <p className="mb-8 text-lg text-muted-foreground md:text-xl">
+              <p className="mb-8 text-base sm:text-lg text-muted-foreground md:text-xl">
                 Laudos, vistorias, projetos arquitetônicos e complementares, levantamento cadastral, regularização de imóveis, fiscalização e gestão de obras.
               </p>
-              <div className="flex flex-col gap-4 sm:flex-row">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Button 
                   size="lg" 
                   onClick={() => window.open(WHATSAPP_LINK, '_blank')}
-                  className="h-14 rounded-full bg-primary px-8 text-lg font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105 hover:bg-primary/90"
+                  className="h-14 rounded-full bg-primary px-6 text-base sm:text-lg font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105 hover:bg-primary/90 md:px-8"
                 >
-                  <MessageCircle className="mr-2 h-5 w-5" /> Falar com Engenheiro no WhatsApp
+                  <MessageCircle className="mr-2 h-5 w-5 shrink-0" /> <span className="text-balance text-center">Falar com Engenheiro no WhatsApp</span>
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
                   onClick={() => scrollToSection('serviços')}
-                  className="h-14 rounded-full border-secondary px-8 text-lg font-bold text-secondary hover:bg-secondary hover:text-white"
+                  className="h-14 rounded-full border-secondary px-8 text-base sm:text-lg font-bold text-secondary hover:bg-secondary hover:text-white"
                 >
                   Ver Serviços
                 </Button>
@@ -397,7 +397,7 @@ export default function App() {
         <div className="container mx-auto px-4">
           <div className="grid items-center gap-16 md:grid-cols-2">
             <div>
-              <h2 className="mb-8 text-3xl font-bold leading-tight md:text-5xl">
+              <h2 className="mb-8 text-2xl sm:text-3xl font-bold leading-tight md:text-5xl text-balance">
                 Não espere o <span className="text-primary">problema</span> se tornar um <span className="text-primary">prejuízo</span> irreversível.
               </h2>
               <div className="space-y-6">
