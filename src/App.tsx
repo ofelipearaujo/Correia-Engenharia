@@ -957,20 +957,35 @@ export default function App() {
             <div>
               <h4 className="mb-6 font-bold text-white">Redes Sociais</h4>
               <div className="flex gap-4">
-                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-primary">
+                <a 
+                  href="https://www.instagram.com/correiaengenharia/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-primary"
+                >
                   <Instagram className="h-5 w-5" />
                 </a>
-                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-primary">
+                <a 
+                  href="https://www.facebook.com/people/Correia-Engenharia/100066430308238/#" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-primary"
+                >
                   <Facebook className="h-5 w-5" />
                 </a>
-                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-primary">
+                <a 
+                  href="https://www.linkedin.com/in/fabiano-s-correia-silva-4978285b/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-primary"
+                >
                   <Linkedin className="h-5 w-5" />
                 </a>
               </div>
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-sm">
-            <p>© 2026 Correia Engenharia. Todos os direitos reservados. Engenheiro Responsável: CREA-SE 123456789</p>
+            <p>© 2026 Correia Engenharia. Todos os direitos reservados. Engenheiro Responsável: CREA-SE 2716071632</p>
           </div>
         </div>
       </footer>
